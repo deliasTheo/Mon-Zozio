@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF9800"
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:context="edu.polytech.Mon_Zozio.FragmentMenu">
+
+
+    <ImageView
+        android:id="@+id/item1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/utilisateur" />
+
+    <ImageView
+        android:id="@+id/item2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/musique" />
+
+    <ImageView
+        android:id="@+id/item3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/video" />
+
+    <ImageView
+        android:id="@+id/item4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/panier" />
+
+
+</LinearLayout>
