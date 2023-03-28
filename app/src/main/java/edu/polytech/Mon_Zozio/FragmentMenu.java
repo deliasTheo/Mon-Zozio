@@ -56,15 +56,15 @@ public class FragmentMenu extends Fragment {
         //Instancier vos composants graphique ici (faîtes vos findViewById)
         Log.d(TAG," fragment display menu ");
 
-        user = view.findViewById(R.id.item1);
-        moto = view.findViewById(R.id.item2);
-        car = view.findViewById(R.id.item3);
-        basket = view.findViewById(R.id.item4);
+        user = view.findViewById(R.id.home);
+        moto = view.findViewById(R.id.loupe);
+        car = view.findViewById(R.id.pin);
+        basket = view.findViewById(R.id.profil);
 
-        user.setImageResource(R.drawable.utilisateur);
-        moto.setImageResource(R.drawable.musique);
-        car.setImageResource(R.drawable.video);
-        basket.setImageResource(R.drawable.panier);
+        user.setImageResource(R.drawable.home);
+        moto.setImageResource(R.drawable.loupe);
+        car.setImageResource(R.drawable.pin);
+        basket.setImageResource(R.drawable.profil);
         switch (currentSelectedItem){
             case 0: user.setImageResource(R.drawable.utilisateur_vert); break;
             case 1: moto.setImageResource(R.drawable.musique_vert); break;
