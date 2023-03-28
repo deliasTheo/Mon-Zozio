@@ -61,15 +61,15 @@ public class FragmentMenu extends Fragment {
         car = view.findViewById(R.id.pin);
         basket = view.findViewById(R.id.profil);
 
-        user.setImageResource(R.drawable.home);
+        user.setImageResource(R.drawable.maison);
         moto.setImageResource(R.drawable.loupe);
         car.setImageResource(R.drawable.pin);
         basket.setImageResource(R.drawable.profil);
         switch (currentSelectedItem){
-            case 0: user.setImageResource(R.drawable.utilisateur_vert); break;
-            case 1: moto.setImageResource(R.drawable.musique_vert); break;
-            case 2: car.setImageResource(R.drawable.video_vert); break;
-            case 3: basket.setImageResource(R.drawable.panier_vert); break;
+            case 0: user.setImageResource(R.drawable.maison); break;
+            case 1: moto.setImageResource(R.drawable.loupe); break;
+            case 2: car.setImageResource(R.drawable.pin); break;
+            case 3: basket.setImageResource(R.drawable.profil); break;
         }
 
         user.setOnClickListener( click -> activity.onClick(0) );
