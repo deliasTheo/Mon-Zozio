@@ -1,6 +1,9 @@
 package edu.polytech.Mon_Zozio;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Window;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
@@ -25,35 +28,47 @@ public class VideoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
         setContentView(R.layout.activity_video);
-        map= findViewById(R.id.map);
+        map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
-        GeoPoint startPoint = new GeoPoint(48.8534, 2.3488);
-        IMapController  mapController = map.getController();
+        GeoPoint startPoint = new GeoPoint(43.736432, 4.183858);
+        IMapController mapController = map.getController();
         mapController.setZoom(18.0);
         mapController.setCenter(startPoint);
         ArrayList<OverlayItem> items = new ArrayList<>();
-        OverlayItem home= new OverlayItem("Home", "My Home", startPoint);
-        Drawable m= home.getMarker(0);
+        OverlayItem home = new OverlayItem("Home", "Lorenzo home", startPoint);
+        Drawable m = home.getMarker(0);
         items.add(home);
-        items.add(new OverlayItem("Resto", "chez Luigi", new GeoPoint(48.8534, 6.3488)));
-        ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getApplicationContext(), items, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-            @Override
-            public boolean onItemSingleTapUp(int index, OverlayItem item) {
-                return true;
-            }
+        Intent intent = getIntent();
+        if (intent != null) {
+            double latitude = intent.getDoubleExtra("latitude", 0);
+            double longitude = intent.getDoubleExtra("longitude", 0);
+            String title = intent.getStringExtra("title");
+            String description = intent.getStringExtra("description");
 
-            @Override
-            public boolean onItemLongPress(int index, OverlayItem item) {
-                return false;
-            }
-        });
+            // Ajouter un marqueur sur la carte à la position spécifiée
+            OverlayItem marker = new OverlayItem("Photo", "Description de la photo", new GeoPoint(latitude, longitude));
+            items.add(marker);
+            ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getApplicationContext(), items, new ItemizedOverlayWithFocus.OnItemGestureListener<OverlayItem>() {
+                @Override
+                public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                    return true;
+                }
 
-        mOverlay.setFocusItemsOnTap(true);
-        map.getOverlays().add(mOverlay);
+                @Override
+                public boolean onItemLongPress(int index, OverlayItem item) {
+                    return false;
+                }
+            });
+
+            mOverlay.setFocusItemsOnTap(true);
+            map.getOverlays().add(mOverlay);
+        }
     }
 
     @Override

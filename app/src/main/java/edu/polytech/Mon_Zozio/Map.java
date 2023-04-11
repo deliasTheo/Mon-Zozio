@@ -9,13 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class VideoAdapter extends BaseAdapter {
+public class Map extends BaseAdapter {
     private Videos videos;
     private ClickableActivity activity;
     private Culture choosenVideo;
     private LayoutInflater mInflater;
 
-    public VideoAdapter(ClickableActivity activity, Videos videos){
+    public Map(ClickableActivity activity, Videos videos){
         this.videos=videos;
         this.activity = activity;
         mInflater = LayoutInflater.from(activity.getContext());
