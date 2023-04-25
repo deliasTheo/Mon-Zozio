@@ -9,8 +9,11 @@
     <org.osmdroid.views.MapView
         android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@id/fragmentMenu">
     </org.osmdroid.views.MapView>
+
 
     <SearchView
         android:id="@+id/searchView"
@@ -23,6 +26,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/search_view" />
+
+    <FrameLayout
+        android:id="@+id/fragmentMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout="@layout/fragment_menu" />
+
 
 
 

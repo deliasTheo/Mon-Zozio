@@ -29,7 +29,7 @@
             android:name=".MusicActivity"
             android:exported="false" />
         <activity
-            android:name=".VideoActivity"
+            android:name=".PinActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
