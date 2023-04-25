@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "282878365758",
+    "project_id": "mon-zozio",
+    "storage_bucket": "mon-zozio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282878365758:android:6796adc95c206c6b1b416f",
+        "android_client_info": {
+          "package_name": "edu.polytech.Mon_Zozio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282878365758-hl3huf0b9fu7gc5fbut47dhmch0c8ted.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0VppsouWMt0F4CzMQh_D99xOHxK5TM3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282878365758-hl3huf0b9fu7gc5fbut47dhmch0c8ted.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
