@@ -12,7 +12,7 @@ public interface ClickableMenuItem<Menu> {
     default void onClick(Integer item){
         Class activity;
         switch ((int)item){
-            case 1: activity = MusicActivity.class; break;
+            case 1: activity = RechercherActivity.class; break;
             case 2: activity = VideoActivity.class; break;
             case 3: activity = BasketAdapter.class; break;
             default: activity = MainActivity.class;

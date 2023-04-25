@@ -17,13 +17,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class MusicActivity extends AppCompatActivity  implements ClickableMenuItem<Integer> {
+public class RechercherActivity extends AppCompatActivity  implements ClickableMenuItem<Integer> {
     private final String TAG = "polytech "+getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_musique);
+        setContentView(R.layout.activity_rechercher);
         FragmentMenu fragmentFame = new FragmentMenu();
         int valeurSaisie = getIntent().getIntExtra(getString(R.string.NUM_ACTIVITY), 0);
         Bundle args = new Bundle();
