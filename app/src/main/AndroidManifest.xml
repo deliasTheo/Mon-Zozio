@@ -23,7 +23,7 @@
             android:name=".DisplayActivity"
             android:exported="false" />
         <activity
-            android:name=".BasketAdapter"
+            android:name=".Profil"
             android:exported="false" />
         <activity
             android:name=".MusicActivity"

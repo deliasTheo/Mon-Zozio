@@ -5,15 +5,17 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Window;
 
 
-public class BasketAdapter extends AppCompatActivity  implements ClickableMenuItem<Integer> {
+public class Profil extends AppCompatActivity  implements ClickableMenuItem<Integer> {
     private final String TAG = "polytech "+getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basket);
+        setContentView(R.layout.activity_profil);
         FragmentMenu fragmentFame = new FragmentMenu();
         int valeurSaisie = getIntent().getIntExtra(getString(R.string.NUM_ACTIVITY),0);
         Bundle args = new Bundle();
