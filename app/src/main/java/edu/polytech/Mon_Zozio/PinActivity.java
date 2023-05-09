@@ -34,7 +34,6 @@ public class PinActivity extends AppCompatActivity implements ClickableMenuItem<
         setContentView(R.layout.pin_activity);
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
-        map.setBuiltInZoomControls(true);
         GeoPoint startPoint = new GeoPoint(43.736432, 4.183858);
         IMapController mapController = map.getController();
         mapController.setZoom(18.0);
@@ -43,6 +42,8 @@ public class PinActivity extends AppCompatActivity implements ClickableMenuItem<
         OverlayItem home = new OverlayItem("Home", "Lorenzo home", startPoint);
         Drawable m = home.getMarker(0);
         items.add(home);
+
+        /////////////Ajouter un marqueur sur la carte à la position d'une photo postée////////////////////////
         Intent intent = getIntent();
         if (intent != null) {
             double latitude = intent.getDoubleExtra("latitude", 0);
@@ -53,6 +54,10 @@ public class PinActivity extends AppCompatActivity implements ClickableMenuItem<
             // Ajouter un marqueur sur la carte à la position spécifiée
             OverlayItem marker = new OverlayItem("Photo", "Description de la photo", new GeoPoint(latitude, longitude));
             items.add(marker);
+
+
+            //////////////////////////////////////////
+
             ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getApplicationContext(), items, new ItemizedOverlayWithFocus.OnItemGestureListener<OverlayItem>() {
                 @Override
                 public boolean onItemSingleTapUp(int index, OverlayItem item) {
