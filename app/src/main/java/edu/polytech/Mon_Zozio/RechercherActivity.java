@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import org.apache.commons.io.IOUtils;
@@ -20,9 +21,16 @@ import java.util.stream.Collectors;
 public class RechercherActivity extends AppCompatActivity  implements ClickableMenuItem<Integer> {
     private final String TAG = "polytech "+getClass().getSimpleName();
 
+    GridView gridView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        gridView = (GridView) findViewById(R.id.grid_view);
+        gridView.setAdapter(new ImageAdapter(this));
+
+
         setContentView(R.layout.activity_rechercher);
         FragmentMenu fragmentFame = new FragmentMenu();
         int valeurSaisie = getIntent().getIntExtra(getString(R.string.NUM_ACTIVITY), 0);
@@ -43,7 +51,7 @@ public class RechercherActivity extends AppCompatActivity  implements ClickableM
             throw new RuntimeException(e);
         }
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, filenames);
-        ListView display = findViewById(R.id.listMusique);
+        /*ListView display = findViewById(R.id.listMusique);
         display.setAdapter(adapter);
 
         display.setOnItemClickListener((parent, view, position, id) -> {
@@ -52,7 +60,7 @@ public class RechercherActivity extends AppCompatActivity  implements ClickableM
             Intent intent = new Intent(getApplicationContext(), DisplayActivity.class);
             intent.putExtra(getString(R.string.TITLE), title);
             startActivity(intent);
-        });
+        });*/
     }
 
     @Override
