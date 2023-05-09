@@ -2,6 +2,8 @@ package edu.polytech.Mon_Zozio;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Window;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +16,14 @@ public class VideoActivity extends AppCompatActivity implements ClickableMenuIte
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
         FragmentMenu fragmentFame = new FragmentMenu();
         int valeurSaisie = getIntent().getIntExtra(getString(R.string.NUM_ACTIVITY),0);
+        final String TAG = "polytech "+getClass().getSimpleName();
+        Log.d(TAG, "Valeur saisie : " + valeurSaisie);
         Bundle args = new Bundle();
         args.putInt(getString(R.string.VALUE_FOR_MENU_FRAGMENT), valeurSaisie);
         fragmentFame.setArguments(args);

@@ -24,7 +24,7 @@ public class FragmentMenu extends Fragment {
     private String attachedActivity;
 
     private int currentSelectedItem;
-    private ImageView user, moto, car, basket;
+    private ImageView user, moto, car, basket, post;
     private ClickableMenuItem<Integer> activity;
 
     public FragmentMenu() {
@@ -48,6 +48,7 @@ public class FragmentMenu extends Fragment {
         if(arguments!=null)  {
             setCurrentSelectedItem( getArguments().getInt(getString(R.string.VALUE_FOR_MENU_FRAGMENT)) );
         }
+        Log.d(TAG, "Test : " + getCurrentSelectedItem());
     }
 
     @Override
@@ -56,26 +57,35 @@ public class FragmentMenu extends Fragment {
         //Instancier vos composants graphique ici (faîtes vos findViewById)
         Log.d(TAG," fragment display menu ");
 
+
         user = view.findViewById(R.id.home);
         moto = view.findViewById(R.id.loupe);
         car = view.findViewById(R.id.pin);
         basket = view.findViewById(R.id.profil);
+        post = view.findViewById(R.id.ajouter);
 
         user.setImageResource(R.drawable.maison);
         moto.setImageResource(R.drawable.loupe);
         car.setImageResource(R.drawable.pin);
         basket.setImageResource(R.drawable.profil);
+        post.setImageResource(R.drawable.ajouter);
+        Log.d(TAG, "mon post : " + post);
+        Log.d(TAG, "mon user : " + user);
+        Log.d(TAG, "currentSelectedItem = " + currentSelectedItem+ "   "+R.drawable.ajouter);
+
         switch (currentSelectedItem){
             case 0: user.setImageResource(R.drawable.maison); break;
             case 1: moto.setImageResource(R.drawable.loupe); break;
             case 2: car.setImageResource(R.drawable.pin); break;
             case 3: basket.setImageResource(R.drawable.profil); break;
+            case 4: post.setImageResource(R.drawable.ajouter); break;
         }
 
         user.setOnClickListener( click -> activity.onClick(0) );
         moto.setOnClickListener( click -> activity.onClick(1) );
         car.setOnClickListener( click -> activity.onClick(2) );
         basket.setOnClickListener( click -> activity.onClick(3) );
+        post.setOnClickListener( click -> activity.onClick(4) );
 
         return view;
     }

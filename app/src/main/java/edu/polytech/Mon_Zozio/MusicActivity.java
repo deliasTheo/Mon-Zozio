@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -22,6 +23,7 @@ public class MusicActivity extends AppCompatActivity  implements ClickableMenuIt
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musique);
         FragmentMenu fragmentFame = new FragmentMenu();
