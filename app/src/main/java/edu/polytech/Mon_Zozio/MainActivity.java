@@ -5,7 +5,8 @@ import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 
-
+import com.google.firebase.iid.internal.FirebaseInstanceIdInternal;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 
 /**
@@ -26,6 +27,16 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
         fragmentFame.setArguments(args);
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentMenu, (Fragment) fragmentFame) .commit();
+
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                System.out.println("La récupération du token a échoué");
+                return;
+            }
+            String token = task.getResult();
+            System.out.println("Token : "+token);
+        });
+
     }
 
     @Override
