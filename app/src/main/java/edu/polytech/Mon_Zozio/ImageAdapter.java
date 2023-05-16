@@ -1,7 +1,6 @@
 package edu.polytech.Mon_Zozio;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,14 +9,18 @@ import android.widget.ImageView;
 
 public class ImageAdapter extends BaseAdapter {
 
-    private Context mContext;
-    public int[] imagesArray;
-    LayoutInflater inflter;
+    private Context myContect;
+    public int[] imagesArray = {
+        R.drawable.zozio_1, R.drawable.zozio_2, R.drawable.zozio_3, R.drawable.zozio_3, R.drawable.zozio_4,
+            R.drawable.zozio_5, R.drawable.zozio_6, R.drawable.zozio_7, R.drawable.zozio_8, R.drawable.zozio_9
+    };
 
-
-    public ImageAdapter(Context c, int[] imagesArray) {
-        this.mContext = c;
-        this.imagesArray=imagesArray;
+    public ImageAdapter(Context myContect) {
+        this.myContect = myContect;
+        this.imagesArray= new int[]{
+                R.drawable.zozio_1, R.drawable.zozio_2, R.drawable.zozio_3, R.drawable.zozio_3, R.drawable.zozio_4,
+                R.drawable.zozio_5, R.drawable.zozio_6, R.drawable.zozio_7, R.drawable.zozio_8, R.drawable.zozio_9
+        };
     }
 
     @Override
@@ -27,12 +30,11 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        //return imagesArray[position];
-        return null;
+        return imagesArray[position];
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int i) {
         return 0;
     }
 
@@ -41,12 +43,12 @@ public class ImageAdapter extends BaseAdapter {
         ImageView imageView;
 
         if(convertView == null){
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
+            imageView = new ImageView(myContect);
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(340, 350));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
             //imageView.setImageResource(imagesArray[position]);
-            imageView.setPadding(8,8,8,8);
+            imageView.setPadding(16,16,16,16);
             //return imageView;
         }else {
             imageView = (ImageView) convertView;

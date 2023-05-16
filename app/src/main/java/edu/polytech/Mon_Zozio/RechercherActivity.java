@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -20,9 +19,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-//public class RechercherActivity extends AppCompatActivity  implements ClickableMenuItem<Integer> {
-public class RechercherActivity extends AppCompatActivity {
-    //private final String TAG = "polytech "+getClass().getSimpleName();
+public class RechercherActivity extends AppCompatActivity  implements ClickableMenuItem<Integer> {
+    private final String TAG = "polytech "+getClass().getSimpleName();
     GridView gridView;
 
     public int[] imagesArray = {R.drawable.zozio_1, R.drawable.zozio_2, R.drawable.zozio_3,
@@ -33,29 +31,13 @@ public class RechercherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        gridView = (GridView) findViewById(R.id.grid_view);
-
-        // Create an object of ImageAdapter and set Adapter to GirdView
-        ImageAdapter imageAdapter = new ImageAdapter(getApplicationContext(), imagesArray);
-        //if (gridView != null) {
-            gridView.setAdapter(imageAdapter);
-        //}
-
-        // implement setOnItemClickListener event on GridView
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // set an Intent to Another Activity
-                Intent intent = new Intent(RechercherActivity.this, SecondActivity.class);
-                intent.putExtra("image", imagesArray[position]); // put image data in Intent
-                startActivity(intent); // start Intent
-            }
-        });
+        gridView = findViewById(R.id.grid_view);
+        if (gridView != null) {
+            gridView.setAdapter(new ImageAdapter(this));
+        }
 
 
-
-
-        /*setContentView(R.layout.activity_rechercher);
+        setContentView(R.layout.activity_rechercher);
         FragmentMenu fragmentFame = new FragmentMenu();
         int valeurSaisie = getIntent().getIntExtra(getString(R.string.NUM_ACTIVITY), 0);
         Bundle args = new Bundle();
@@ -74,10 +56,10 @@ public class RechercherActivity extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, filenames);*/
-
+        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, filenames);
         /*ListView display = findViewById(R.id.listMusique);
         display.setAdapter(adapter);
+
         display.setOnItemClickListener((parent, view, position, id) -> {
             Culture title = new Culture( csvData.get(position).split(",")[0],Integer.parseInt(csvData.get(position).split(",")[1]), R.drawable.note );
             //Toast.makeText(getApplicationContext(), "item Clicked = "+ title, Toast.LENGTH_SHORT).show();
@@ -87,8 +69,7 @@ public class RechercherActivity extends AppCompatActivity {
         });*/
     }
 
-
-    /*@Override
+    @Override
     public Context getContext() {
         return getApplicationContext();
     }
@@ -96,5 +77,5 @@ public class RechercherActivity extends AppCompatActivity {
     @Override
     public String getKeyValue(int id) {
         return getString(R.string.NUM_ACTIVITY);
-    }*/
+    }
 }
