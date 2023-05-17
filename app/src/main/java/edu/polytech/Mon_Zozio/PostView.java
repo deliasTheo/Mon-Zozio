@@ -1,68 +1,74 @@
 package edu.polytech.Mon_Zozio;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static android.view.View.inflate;
-
-import static java.security.AccessController.getContext;
-
 import android.content.Context;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import java.util.Observable;
+import java.util.Observer;
 
-public class PostView extends ConstraintLayout {
-    private ImageView likeButton;
-    private PostModel postModel;
-    private PostController postController;
+public class PostView implements Observer {
+    private final String TAG = "Mon_Zozio " + getClass().getSimpleName();
+    private boolean modelCreated = false;
 
-    public PostView(Context context) {
-        super(context);
-        init();
+    private ClickableActivity controller;
+    private ListView listview;
+    private PostAdapter adapter;
+    private ImageView like;
+
+
+    public <T extends ViewGroup> PostView(ListView listview, Context context) {
+
+        this.listview = listview;
+
+        adapter = new PostAdapter(context, this); //carrefull, model is null !
+        this.listview.setAdapter( adapter );
+        Log.d(TAG, "View is created" );
     }
 
-    public PostView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
-
-    public PostView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
-    }
-
-    public void setPostModel(PostModel postModel) {
-        this.postModel = postModel;
-        postController = new PostController(postModel);
-        updateView();
-    }
-
-    private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.activity_listview, this);
-        likeButton = findViewById(R.id.like);
-        likeButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (postModel.isLiked()) {
-                    postController.unlikePost();
-                } else {
-                    postController.likePost();
-                }
-                updateView();
-            }
-        });
-    }
-
-    private void updateView() {
-        if (postModel.isLiked()) {
-            likeButton.setImageResource(R.drawable.icon_likerouge);
-        } else {
-            likeButton.setImageResource(R.drawable.icon_like);
+    @Override
+    public void update(Observable observable, Object o) {
+        PostModel modelPost = (PostModel) o;
+        PostList model = (PostList) observable;
+        if (!modelCreated) {        //fist time only
+            adapter.updateModel(model);
+            ListView listView = listview.findViewById(R.id.postListView);
+            listView.setAdapter( adapter );
+            modelCreated = true;
         }
+        else {
+            adapter.refresh(model);
+        }
+        Log.d("Monzozio", "update: " + modelPost);
+        like = listview.findViewById(R.id.like);
+        like.setImageResource(modelPost.isLiked() ? R.drawable.icon_likerouge : R.drawable.icon_like);
+
+
+        Log.d(TAG, "View update with ==> " + model);
+
     }
+
+
+    public void setListener(ClickableActivity controller) {
+        this.controller = controller;
+    }
+
+
+    public void onClick(int i) {
+        controller.onClick(i);
+    }
+
+    public ListView getLayout() {
+        return listview;
+    }
+
+
+    public Context getContext() {
+        return listview.getContext();
+    }
+
 }
 

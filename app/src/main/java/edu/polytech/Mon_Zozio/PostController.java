@@ -1,18 +1,33 @@
 package edu.polytech.Mon_Zozio;
 
-public class PostController {
-    private PostModel postModel;
+import android.content.Context;
+import android.util.Log;
+import android.widget.ImageView;
 
-    public PostController(PostModel postModel) {
+public class PostController implements ClickableActivity {
+
+    ImageView like;
+    private PostList postModel;
+    private PostView postView;
+
+    public PostController(PostList postModel, PostView postView) {
         this.postModel = postModel;
+        this.postView = postView;
     }
 
-    public void likePost() {
-        postModel.setLiked(true);
+
+    @Override
+    public Context getContext() {
+        return postView.getContext();
     }
 
-    public void unlikePost() {
-        postModel.setLiked(false);
+    @Override
+    public void onClick(int position) {
+        like = postView.getLayout().findViewById(R.id.like);
+
+
+        like.setOnClickListener(click -> postModel.update(position));
+
     }
 }
 
