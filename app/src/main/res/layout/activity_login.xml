@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <EditText
+        android:id="@+id/login_pseudo_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:hint="Pseudo"
+        android:layout_gravity="center_horizontal"/>
+
+
+    <EditText
+        android:id="@+id/login_mdp_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:hint="Mot de passe"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/login_login_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Se connecter"
+        android:textColor="@color/black"
+        android:background="@color/greenLight"/>
+</LinearLayout>
