@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
             String token = task.getResult();
             System.out.println("Token : "+token);
         });
-        sendNotificationOnChannel(CHANNEL_3_ID, "Mon Zozio", "Bienvenue dans Mon Zozio,\npour les ornithologues c'est l'eldorado !", 1);
+        //sendNotificationOnChannel(CHANNEL_3_ID, "Mon Zozio", "Bienvenue dans Mon Zozio,\npour les ornithologues c'est l'eldorado !", 1);
     }
 
     private void sendNotificationOnChannel(String channelId, String title, String content, int priority) {
