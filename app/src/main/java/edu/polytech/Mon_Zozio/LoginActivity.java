@@ -16,6 +16,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.snackbar.Snackbar;
 
 import edu.polytech.Mon_Zozio.databinding.ActivityLoginBinding;
 
@@ -93,8 +94,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         if (requestCode == RC_SIGN_IN) {
             // SUCCESS
             if (resultCode == RESULT_OK) {
+                Log.d(TAG, "signInWithEmail:success");
+
+                Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(mainActivityIntent);
                 //userManager.createUser();
-                showSnackBar(getString(R.string.connection_succeed));
+                //2showSnackBar(getString(R.string.connection_succeed));
             } else {
                 // ERRORS
                 if (response == null) {
