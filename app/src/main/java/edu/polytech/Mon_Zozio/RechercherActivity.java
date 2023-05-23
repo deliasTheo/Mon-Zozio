@@ -31,14 +31,16 @@ public class RechercherActivity extends AppCompatActivity  implements ClickableM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+
+        setContentView(R.layout.activity_rechercher);
+        FragmentMenu fragmentFame = new FragmentMenu();
         gridView = findViewById(R.id.grid_view);
         if (gridView != null) {
             gridView.setAdapter(new ImageAdapter(this));
         }
 
-
-        setContentView(R.layout.activity_rechercher);
-        FragmentMenu fragmentFame = new FragmentMenu();
         int valeurSaisie = getIntent().getIntExtra(getString(R.string.NUM_ACTIVITY), 0);
         Bundle args = new Bundle();
         args.putInt(getString(R.string.VALUE_FOR_MENU_FRAGMENT), valeurSaisie);
