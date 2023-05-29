@@ -15,6 +15,7 @@ public interface ClickableMenuItem<Menu> {
             case 1: activity = MusicActivity.class; break;
             case 2: activity = VideoActivity.class; break;
             case 3: activity = BasketAdapter.class; break;
+            case 4 : activity = AjouterPostActivity_old.class;  break;
             default: activity = MainActivity.class;
         }
         Intent intent = new Intent(getContext(), activity);
