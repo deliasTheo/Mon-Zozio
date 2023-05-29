@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -15,21 +16,21 @@ import android.widget.ListView;
  * https://stackoverflow.com/questions/3263611/border-for-an-image-view-in-android
  */
 public class MainActivity extends AppCompatActivity implements ClickableMenuItem<Integer>, ClickableActivity{
-    PostList postList = PostList.getInstance();
-        @Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PostAdapter postAdapter = new PostAdapter(this);
-        ListView listView = (ListView) findViewById(R.id.postListView);
-        listView.setAdapter(postAdapter);
 
+        ListView listView = findViewById(R.id.postListView);
+        ((ApplicationMonZozio)getApplication()).onViewCreated(listView);
 
         FragmentMenu fragmentFame = new FragmentMenu();
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentMenu, (Fragment) fragmentFame) .commit();
     }
+
 
     @Override
     public Context getContext() {
