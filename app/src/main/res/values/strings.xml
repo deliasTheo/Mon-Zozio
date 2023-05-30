@@ -3,4 +3,9 @@
     <string name="NUM_ACTIVITY">numActivity</string>
     <string name="VALUE_FOR_MENU_FRAGMENT">menuFragmentValue</string>
     <string name="TITLE">title</string>
+    <string name="changer_de_description" />
+    <string name="description">Description</string>
+    <string name="changer_de_photos">Changer de photo</string>
+    <string name="changer_de_descriptions">Changer de description</string>
+    <string name="valider">Valider</string>
 </resources>
