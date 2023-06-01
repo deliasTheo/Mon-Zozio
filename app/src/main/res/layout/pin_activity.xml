@@ -11,9 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@id/fragmentMenu">
-    </org.osmdroid.views.MapView>
-
+        app:layout_constraintBottom_toTopOf="@id/fragmentMenu" />
 
     <SearchView
         android:id="@+id/searchView"
@@ -34,8 +32,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout="@layout/fragment_menu" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
