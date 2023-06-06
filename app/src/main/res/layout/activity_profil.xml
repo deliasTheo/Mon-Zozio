@@ -83,6 +83,19 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/description" />
 
+    <Button
+        android:id="@+id/btnSetBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:text="Set Birthday"
+        android:textSize="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btndescriptionvalidation" />
+
+
     <!-- Rectangle gris horizontal -->
     <View
         android:id="@+id/horizontalSeparator"

@@ -3,12 +3,16 @@ package edu.polytech.Mon_Zozio;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -17,6 +21,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -25,6 +30,9 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.Locale;
 
 public class Profil extends AppCompatActivity implements ClickableMenuItem<Integer> {
     private static final int RESULT_LOAD_IMG = 2;
@@ -35,6 +43,8 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
     private ImageView imageView;
     private EditText userName;
     private ImageButton btnUserName;
+    private String birthday;
+    private Button btnSetBirthday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +122,9 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
 
                 // Récupérer le texte
                 User.getInstance().setDescription(String.valueOf(description.getText()));
+
+                // Enregistrez l'événement d'anniversaire dans le calendrier
+                addBirthdayEventToCalendar();
             }
         });
 
@@ -128,6 +141,17 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
 
                 // Récupérer le texte
                 User.getInstance().setUserName(String.valueOf(userName.getText()));
+            }
+        });
+
+
+
+        //bouton date d'anniversaire
+        btnSetBirthday = findViewById(R.id.btnSetBirthday);
+        btnSetBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showBirthdayPickerDialog();
             }
         });
     }
@@ -208,7 +232,99 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
     }
 
 
-    @Override
+
+//    private void showBirthdayPickerDialog() {
+//        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                // Mettre à jour la variable birthday avec la date sélectionnée
+//                birthday = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
+//                // Enregistrer la date d'anniversaire dans le calendrier
+//                addBirthdayEventToCalendar();
+//            }
+//        };
+//
+//        // Obtenir la date actuelle pour définir la valeur par défaut du DatePickerDialog
+//        Calendar calendar = Calendar.getInstance();
+//        int currentYear = calendar.get(Calendar.YEAR);
+//        int currentMonth = calendar.get(Calendar.MONTH);
+//        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+//
+//        // Créer le DatePickerDialog
+//        DatePickerDialog datePickerDialog = new DatePickerDialog(Profil.this, dateSetListener, currentYear, currentMonth, currentDay);
+//        datePickerDialog.show();
+//    }
+
+
+
+    private void showBirthdayPickerDialog() {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // Obtenir l'année actuelle
+                int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
+                // Obtenir le mois et le jour sélectionnés par l'utilisateur
+                int selectedMonth = monthOfYear + 1;
+                int selectedDay = dayOfMonth;
+
+                // Vérifier si la date d'anniversaire est déjà passée cette année
+                Calendar todayCalendar = Calendar.getInstance();
+                Calendar birthdayCalendar = Calendar.getInstance();
+                birthdayCalendar.set(currentYear, selectedMonth - 1, selectedDay);
+
+                if (birthdayCalendar.before(todayCalendar)) {
+                    // L'anniversaire est déjà passé cette année, déplacer à l'année suivante
+                    birthdayCalendar.add(Calendar.YEAR, 1);
+                }
+
+                // Mettre à jour la variable birthday avec la nouvelle date calculée
+                birthday = String.format(Locale.getDefault(), "%04d-%02d-%02d", birthdayCalendar.get(Calendar.YEAR), selectedMonth, selectedDay);
+
+                // Enregistrer l'événement dans le calendrier
+                addBirthdayEventToCalendar();
+            }
+        };
+
+        // Afficher le sélecteur de date
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
+
+
+
+    private void addBirthdayEventToCalendar() {
+        if (birthday != null) {
+            // Convertissez la date d'anniversaire en format Date
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            try {
+                Date birthdayDate = dateFormat.parse(birthday);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(birthdayDate);
+
+                // Créez un Intent pour ajouter un nouvel événement dans le calendrier
+                Intent intent = new Intent(Intent.ACTION_INSERT)
+                        .setData(CalendarContract.Events.CONTENT_URI)
+                        .putExtra(CalendarContract.Events.TITLE, "Anniversaire")
+                        .putExtra(CalendarContract.Events.DESCRIPTION, "N'oubliez pas de venir sur l'application pour votre anniversaire !")
+                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.getTimeInMillis())
+                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTimeInMillis() + 60 * 60 * 1000) // Durée de 1 heure pour l'événement
+                        .putExtra(CalendarContract.Events.ALL_DAY, true)
+                        .putExtra(CalendarContract.Events.HAS_ALARM, true);
+
+                // Démarrez l'activité pour ajouter l'événement dans le calendrier
+                startActivity(intent);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+        @Override
     public Context getContext() {
         return getApplicationContext();
     }
