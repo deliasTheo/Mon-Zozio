@@ -25,7 +25,7 @@ public class PinActivity extends AppCompatActivity implements ClickableMenuItem<
 
     private MapView map;
     private SearchView searchView;
-    private ArrayList<BirdMarker> birdMarkers;
+    private BirdMarkerList birdMarkerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +40,13 @@ public class PinActivity extends AppCompatActivity implements ClickableMenuItem<
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
-        GeoPoint startPoint = new GeoPoint(43.736432, 4.183858);
+        GeoPoint startPoint = new GeoPoint(46.603354, 1.888334); // Coordonnées du centre de la France
         IMapController mapController = map.getController();
-        mapController.setZoom(18.0);
+        mapController.setZoom(6.0); // Zoom suffisamment élevé pour afficher toute la France
         mapController.setCenter(startPoint);
 
-        birdMarkers = new ArrayList<>();
-        // Ajoutez ici vos marqueurs avec les noms d'oiseaux et les coordonnées correspondantes
-        birdMarkers.add(new BirdMarker("Merle noir", new GeoPoint(43.735, 4.185)));
-        birdMarkers.add(new BirdMarker("Pinson des arbres", new GeoPoint(43.738, 4.184)));
-        birdMarkers.add(new BirdMarker("Roitelet huppé", new GeoPoint(43.737, 4.186)));
+        birdMarkerList = new BirdMarkerList();
+        ArrayList<BirdMarker> birdMarkers = (ArrayList<BirdMarker>) birdMarkerList.getBirdMarkers();
 
         ArrayList<OverlayItem> items = new ArrayList<>();
         for (BirdMarker birdMarker : birdMarkers) {
@@ -91,6 +88,7 @@ public class PinActivity extends AppCompatActivity implements ClickableMenuItem<
         map.getOverlays().clear();
 
         ArrayList<OverlayItem> items = new ArrayList<>();
+        ArrayList<BirdMarker> birdMarkers = (ArrayList<BirdMarker>) birdMarkerList.getBirdMarkers();
         for (BirdMarker birdMarker : birdMarkers) {
             if (birdMarker.getBirdName().toLowerCase().contains(query.toLowerCase())) {
                 OverlayItem marker = new OverlayItem(birdMarker.getBirdName(), "", birdMarker.getCoordinates());
