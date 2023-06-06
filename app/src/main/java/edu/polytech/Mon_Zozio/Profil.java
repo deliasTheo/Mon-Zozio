@@ -54,12 +54,18 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
         // Photo
         btnPhoto = findViewById(R.id.btnphoto);
         imageView = findViewById(R.id.imageView);
-        imageView.setImageResource(User.getInstance().getPp());
 
-        //UserName
-        userName=findViewById(R.id.UserName);
+        Uri photoPath = User.getInstance().getPhotoPath();
+        if (photoPath != null) {
+            imageView.setImageURI(photoPath);
+        } else {
+            imageView.setImageResource(R.drawable.profil);
+        }
+
+        // UserName
+        userName = findViewById(R.id.UserName);
         userName.setText(User.getInstance().getUserName());
-        btnUserName=findViewById(R.id.UserNameValidation);
+        btnUserName = findViewById(R.id.UserNameValidation);
 
         // Ajout du TextWatcher à l'EditText
         description.addTextChangedListener(descriptionTextWatcher);
@@ -82,11 +88,11 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
                 // Cacher le clavier virtuel
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
-
                 // Récupérer le texte
                 User.getInstance().setDescription(String.valueOf(description.getText()));
             }
         });
+
         btnUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,12 +104,12 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
                 // Cacher le clavier virtuel
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
-
                 // Récupérer le texte
                 User.getInstance().setUserName(String.valueOf(userName.getText()));
             }
         });
     }
+
 
     private void getImageFromAlbum() {
         try {
@@ -118,7 +124,6 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
     private TextWatcher descriptionTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            // Ne fait rien avant le changement de texte
         }
 
         @Override
@@ -147,19 +152,15 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            // Vérifie si le texte a changé
-            if (!s.toString().equals(User.getInstance().getDescription())) {
-                // Affiche le bouton si le texte a changé
+            if (!s.toString().equals(User.getInstance().getUserName())) {
                 btnUserName.setVisibility(View.VISIBLE);
             } else {
-                // Masque le bouton si le texte est identique
                 btnUserName.setVisibility(View.INVISIBLE);
             }
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-            // Ne fait rien après le changement de texte
         }
     };
 
@@ -173,6 +174,8 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 imageView.setImageBitmap(selectedImage);
+
+                User.getInstance().setPhotoPath(imageUri); // Enregistrer l'URI de l'image
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(Profil.this, "Something went wrong", Toast.LENGTH_LONG).show();
@@ -181,6 +184,7 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
             Toast.makeText(Profil.this, "You haven't picked an image", Toast.LENGTH_LONG).show();
         }
     }
+
 
     @Override
     public Context getContext() {
