@@ -15,8 +15,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -61,6 +63,26 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
         } else {
             imageView.setImageResource(R.drawable.profil);
         }
+
+        // GridView
+        GridView gridView = findViewById(R.id.gridView);
+        ImageAdapter imageAdapter = new ImageAdapter(this);
+        gridView.setAdapter(imageAdapter);
+
+        // Ajoutez vos images à l'adaptateur de la grille
+        imageAdapter.addImage(R.drawable.merle);
+        imageAdapter.addImage(R.drawable.pinson);
+        imageAdapter.addImage(R.drawable.bruant_zizi);
+        // Ajoutez autant d'images que vous le souhaitez
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Réagissez au clic sur une image de la grille
+                // Vous pouvez afficher l'image en plein écran, la modifier, etc.
+                Toast.makeText(Profil.this, "Image " + position + " clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // UserName
         userName = findViewById(R.id.UserName);
