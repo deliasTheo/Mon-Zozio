@@ -1,24 +1,20 @@
 package edu.polytech.Mon_Zozio;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageAdapter extends BaseAdapter {
+public class ProfileImageAdapter extends BaseAdapter {
     private Context context;
     private List<Integer> images;
 
-    public ImageAdapter(Context context) {
+    public ProfileImageAdapter(Context context) {
         this.context = context;
         this.images = new ArrayList<>();
     }

@@ -76,7 +76,7 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
 
         // GridView
         GridView gridView = findViewById(R.id.gridView);
-        ImageAdapter imageAdapter = new ImageAdapter(this);
+        ProfileImageAdapter imageAdapter = new ProfileImageAdapter(this);
         gridView.setAdapter(imageAdapter);
 
         // Ajoutez vos images à l'adaptateur de la grille
@@ -122,9 +122,6 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
 
                 // Récupérer le texte
                 User.getInstance().setDescription(String.valueOf(description.getText()));
-
-                // Enregistrez l'événement d'anniversaire dans le calendrier
-                addBirthdayEventToCalendar();
             }
         });
 
