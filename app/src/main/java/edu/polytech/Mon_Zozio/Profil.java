@@ -1,6 +1,9 @@
 package edu.polytech.Mon_Zozio;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.fragment.app.Fragment;
 
 import android.app.DatePickerDialog;
@@ -17,6 +20,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -58,10 +62,16 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
         fragmentFame.setArguments(args);
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentMenu, (Fragment) fragmentFame).commit();
 
+
+        WindowSizeClass currentHeight = WindowSizeClass.computeWindowSizeClasses(getResources(), this)[0];
+        WindowSizeClass currentWidth = WindowSizeClass.computeWindowSizeClasses(getResources(), this)[1];
+
+
         // Description
         description = findViewById(R.id.description);
         description.setText(User.getInstance().getDescription());
         btnDescriptionValidation = findViewById(R.id.btndescriptionvalidation);
+
 
         // Photo
         btnPhoto = findViewById(R.id.btnphoto);
@@ -76,7 +86,7 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
 
         // GridView
         GridView gridView = findViewById(R.id.gridView);
-        ProfileImageAdapter imageAdapter = new ProfileImageAdapter(this);
+        ProfileImageAdapter imageAdapter = new ProfileImageAdapter(this, getResources(), this);
         gridView.setAdapter(imageAdapter);
 
         // Ajoutez vos images à l'adaptateur de la grille
@@ -151,6 +161,38 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
                 showBirthdayPickerDialog();
             }
         });
+        ConstraintLayout constraintLayout = findViewById(R.id.layoutConstraint);
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(constraintLayout);
+
+        if(currentWidth==WindowSizeClass.EXPANDED){
+            btnDescriptionValidation.setWidth(500);
+            userName.setTextSize(40);
+            description.setTextSize(40);
+            description.setMaxWidth(1500);
+
+            constraintSet.connect(btnSetBirthday.getId(), ConstraintSet.START, btnPhoto.getId(), ConstraintSet.END);
+            constraintSet.connect(btnSetBirthday.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END);
+            constraintSet.connect(btnSetBirthday.getId(), ConstraintSet.TOP, btnPhoto.getId(), ConstraintSet.TOP);
+            constraintSet.connect(btnSetBirthday.getId(), ConstraintSet.BOTTOM, btnPhoto.getId(), ConstraintSet.BOTTOM);
+            constraintSet.applyTo(constraintLayout);
+
+            constraintSet.connect(btnPhoto.getId(), ConstraintSet.END, btnSetBirthday.getId(), ConstraintSet.START);
+            constraintSet.applyTo(constraintLayout);
+
+            btnSetBirthday.setTextSize(23);
+            btnPhoto.setTextSize(23);
+            btnSetBirthday.setWidth(650);
+            btnPhoto.setWidth(650);
+
+            ViewGroup.LayoutParams layoutParams = imageView.getLayoutParams();
+            layoutParams.height = (int) (layoutParams.height*2);
+            layoutParams.width = (int) (layoutParams.width*2);
+            imageView.setLayoutParams(layoutParams);
+
+
+        }
+
     }
 
 

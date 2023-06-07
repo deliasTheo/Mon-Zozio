@@ -9,15 +9,18 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
+import androidx.window.layout.WindowMetrics;
+import androidx.window.layout.WindowMetricsCalculator;
 
 import android.app.Notification;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.firebase.messaging.FirebaseMessaging;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 
 /**
  * todo: border imageview
@@ -46,8 +49,12 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
             String token = task.getResult();
             System.out.println("Token : "+token);
         });
+
         //sendNotificationOnChannel(CHANNEL_3_ID, "Mon Zozio", "Bienvenue dans Mon Zozio,\npour les ornithologues c'est l'eldorado !", 1);
     }
+
+
+
 
     private void sendNotificationOnChannel(String channelId, String title, String content, int priority) {
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, channelId)
