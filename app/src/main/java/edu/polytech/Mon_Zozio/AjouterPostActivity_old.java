@@ -34,7 +34,7 @@ import java.util.List;
  * todo: border imageview
  * https://stackoverflow.com/questions/3263611/border-for-an-image-view-in-android
  */
-public class AjouterPostActivity_old extends AppCompatActivity implements ClickableMenuItem<Integer>, ClickableActivity, SurfaceHolder.Callback {
+public class AjouterPostActivity_old extends AppCompatActivity implements ClickableMenuItem<Integer>, Controller, SurfaceHolder.Callback {
     private static final int REQUEST_CAMERA_PERMISSION = 200;
     private SurfaceView surfaceView;
     private Camera camera;
