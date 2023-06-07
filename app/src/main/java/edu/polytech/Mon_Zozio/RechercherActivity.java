@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import org.apache.commons.io.IOUtils;
@@ -17,14 +19,28 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class MusicActivity extends AppCompatActivity  implements ClickableMenuItem<Integer> {
+public class RechercherActivity extends AppCompatActivity  implements ClickableMenuItem<Integer> {
     private final String TAG = "polytech "+getClass().getSimpleName();
+    GridView gridView;
+
+    public int[] imagesArray = {R.drawable.zozio_1, R.drawable.zozio_2, R.drawable.zozio_3,
+            R.drawable.zozio_4, R.drawable.zozio_5, R.drawable.zozio_6, R.drawable.zozio_7,
+            R.drawable.zozio_8, R.drawable.zozio_9};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_musique);
+
+
+
+
+        setContentView(R.layout.activity_rechercher);
         FragmentMenu fragmentFame = new FragmentMenu();
+        gridView = findViewById(R.id.grid_view);
+        if (gridView != null) {
+            gridView.setAdapter(new ImageAdapter(this));
+        }
+
         int valeurSaisie = getIntent().getIntExtra(getString(R.string.NUM_ACTIVITY), 0);
         Bundle args = new Bundle();
         args.putInt(getString(R.string.VALUE_FOR_MENU_FRAGMENT), valeurSaisie);
@@ -43,7 +59,7 @@ public class MusicActivity extends AppCompatActivity  implements ClickableMenuIt
             throw new RuntimeException(e);
         }
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, filenames);
-        ListView display = findViewById(R.id.listMusique);
+        /*ListView display = findViewById(R.id.listMusique);
         display.setAdapter(adapter);
 
         display.setOnItemClickListener((parent, view, position, id) -> {
@@ -52,7 +68,7 @@ public class MusicActivity extends AppCompatActivity  implements ClickableMenuIt
             Intent intent = new Intent(getApplicationContext(), DisplayActivity.class);
             intent.putExtra(getString(R.string.TITLE), title);
             startActivity(intent);
-        });
+        });*/
     }
 
     @Override

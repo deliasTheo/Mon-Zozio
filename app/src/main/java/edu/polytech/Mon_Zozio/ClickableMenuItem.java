@@ -11,7 +11,6 @@ public interface ClickableMenuItem<Menu> {
     void startActivity(Intent intent);
     default void onClick(Integer item) throws Throwable {
         Class activity=ActivityFactory.build((int)item);
-
         Intent intent = new Intent(getContext(), activity);
         intent.putExtra(getKeyValue(R.string.NUM_ACTIVITY), (int)item);
         startActivity(intent);

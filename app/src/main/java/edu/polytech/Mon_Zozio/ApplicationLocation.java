@@ -3,7 +3,13 @@ package edu.polytech.Mon_Zozio;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.pm.PackageManager;
 import android.os.Build;
+import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.util.Objects;
 
@@ -40,6 +46,30 @@ public class ApplicationLocation extends Application {
         }
     }
 
+    private void sendNotificationOnChannel(String title, String content, String channelId, int priority) {
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, channelId)
+                .setContentTitle(title)
+                .setContentText(content)
+                .setPriority(priority)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE);
+        switch (channelId) {
+            case CHANNEL_1_ID:
+                notification.setSmallIcon(R.drawable.channel1);
+                break;
+            case CHANNEL_2_ID:
+                notification.setSmallIcon(R.drawable.channel2);
+                break;
+            case CHANNEL_3_ID:
+                notification.setSmallIcon(R.drawable.channel3);
+                break;
+        }
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: for another course... ;-)
+            Log.d("Application Location", "permission needed to send notification !");
+            return;
+        }
+        NotificationManagerCompat.from(this).notify(0, notification.build());
+    }
 
 
 
@@ -47,5 +77,6 @@ public class ApplicationLocation extends Application {
     public void onCreate() {
         super.onCreate();
         createNotificationChannels();
+        sendNotificationOnChannel("Mon Zozio • Carte", "Bienvenue dans la carte Mon Zozio. C'est la carte, c'est la carte...", CHANNEL_3_ID, 0);
     }
 }
