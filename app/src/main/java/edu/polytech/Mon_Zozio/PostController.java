@@ -4,13 +4,14 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
 
-public class PostController implements ClickableActivity {
+public class PostController implements Controller {
+    private final String TAG = "MonZozio "+getClass().getSimpleName();
 
     ImageView like;
-    private PostList postModel;
+    private PostModel postModel;
     private PostView postView;
 
-    public PostController(PostList postModel, PostView postView) {
+    public PostController(PostModel postModel, PostView postView) {
         this.postModel = postModel;
         this.postView = postView;
     }
@@ -23,10 +24,8 @@ public class PostController implements ClickableActivity {
 
     @Override
     public void onClick(int position) {
-        like = postView.getLayout().findViewById(R.id.like);
-
-
-        like.setOnClickListener(click -> postModel.update(position));
+        Log.d(TAG, "position = "+ position);
+        postModel.setLike(position);
 
     }
 }

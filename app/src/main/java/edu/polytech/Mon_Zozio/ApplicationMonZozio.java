@@ -2,7 +2,6 @@ package edu.polytech.Mon_Zozio;
 
 import android.app.Application;
 import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 
@@ -18,10 +17,10 @@ public class ApplicationMonZozio extends Application {
         //create VIEW with XML layout
         PostView view = new PostView(listView, this );
         //create CONTROLLER
-        PostController controller = new PostController(PostList.getInstance(),view);
+        PostController controller = new PostController(PostModel.getInstance(),view);
         //link MVC
-        view.setListener(controller);
-        PostList.getInstance().addObserver(view);
+        view.setController(controller);
+        PostModel.getInstance().addObserver(view);
     }
 
 }

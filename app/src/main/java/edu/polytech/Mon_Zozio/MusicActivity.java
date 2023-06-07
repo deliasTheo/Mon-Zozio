@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 
 public class MusicActivity extends AppCompatActivity  implements ClickableMenuItem<Integer> {
-    private final String TAG = "polytech "+getClass().getSimpleName();
+    private final String TAG = "MonZozio "+getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

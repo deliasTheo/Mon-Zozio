@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 
 public class FragmentFame extends Fragment {
-    private final String TAG = "polytech "+getClass().getSimpleName();
+    private final String TAG = "MonZozio "+getClass().getSimpleName();
     private String attachedActivity;
 
     public FragmentFame() {

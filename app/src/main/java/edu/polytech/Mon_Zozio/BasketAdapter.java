@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 
 public class BasketAdapter extends AppCompatActivity  implements ClickableMenuItem<Integer> {
-    private final String TAG = "polytech "+getClass().getSimpleName();
+    private final String TAG = "MonZozio "+getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

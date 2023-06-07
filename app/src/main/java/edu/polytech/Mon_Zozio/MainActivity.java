@@ -4,10 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 
@@ -15,7 +12,7 @@ import android.widget.ListView;
  * todo: border imageview
  * https://stackoverflow.com/questions/3263611/border-for-an-image-view-in-android
  */
-public class MainActivity extends AppCompatActivity implements ClickableMenuItem<Integer>, ClickableActivity{
+public class MainActivity extends AppCompatActivity implements ClickableMenuItem<Integer>, Controller {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

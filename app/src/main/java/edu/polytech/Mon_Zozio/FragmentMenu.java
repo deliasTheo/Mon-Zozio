@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 public class FragmentMenu extends Fragment {
-    private final String TAG = "polytech "+getClass().getSimpleName();
+    private final String TAG = "MonZozio "+getClass().getSimpleName();
     private String attachedActivity;
 
     private int currentSelectedItem;

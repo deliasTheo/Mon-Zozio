@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 
 
 
-public class VideoActivity extends AppCompatActivity implements ClickableMenuItem, ClickableActivity {
+public class VideoActivity extends AppCompatActivity implements ClickableMenuItem, Controller {
     private Videos videos;
 
     @Override
