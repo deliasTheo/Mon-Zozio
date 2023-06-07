@@ -81,7 +81,7 @@ public class FragmentMenu extends Fragment {
         });
         moto.setOnClickListener( click -> {
             try {
-                activity.onClick(ActivityFactory.MUSIC_ACTIVITY);
+                activity.onClick(ActivityFactory.RECHERCHER_ACTIVITY);
             } catch (Throwable e) {
                 throw new RuntimeException(e);
             }
