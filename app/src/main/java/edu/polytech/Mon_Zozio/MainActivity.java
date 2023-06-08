@@ -86,6 +86,27 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
         });
 
         //sendNotificationOnChannel(CHANNEL_3_ID, "Mon Zozio", "Bienvenue dans Mon Zozio,\npour les ornithologues c'est l'eldorado !", 1);
+
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+
+                Picasso.get().load(value).into(rImage);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(MainActivity.this, "Loading failed", Toast.LENGTH_SHORT).show();
+                // Failed to read value
+
+            }
+        });
     }
 
 
@@ -113,26 +134,6 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
             return;
         }
         NotificationManagerCompat.from(this).notify(0, notification.build());
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-
-                Picasso.get().load(value).into(rImage);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Toast.makeText(MainActivity.this, "Loading failed", Toast.LENGTH_SHORT).show();
-                // Failed to read value
-
-            }
-        });
     }
 
     @Override
