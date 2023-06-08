@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.*;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -42,5 +40,31 @@ public class EbirdApiClient {
         };
         requestQueue.add(request);
     }
+
+
+
+
+    /*public void getRecentObservations() {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder()
+                .url("https://api.ebird.org/v2/data/obs/{{regionCode}}/recent/notable?detail=full")
+                .method("GET", body)
+                //.get()
+                .addHeader("X-eBirdApiToken", "{{x-ebirdapitoken}}")
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            String responseBody = response.body().string();
+            // ... do something with response
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
+
+
 
 }
