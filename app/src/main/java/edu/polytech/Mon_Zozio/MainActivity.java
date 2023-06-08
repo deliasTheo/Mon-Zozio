@@ -1,5 +1,6 @@
 package edu.polytech.Mon_Zozio;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import android.content.Context;
@@ -15,6 +16,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * todo: border imageview
@@ -22,14 +28,25 @@ import com.squareup.picasso.Picasso;
  */
 public class MainActivity extends AppCompatActivity implements ClickableMenuItem<Integer> {
     private final String TAG = "polytech "+getClass().getSimpleName();
+    /*EbirdApiClient ebirdApiClient = new EbirdApiClient();
+    String regionCode = "FR";*/
 
     ImageView rImage;
+
+    public MainActivity() throws IOException {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         rImage = findViewById(R.id.rImage);
         FragmentMenu fragmentFame = new FragmentMenu();
+        /*try {
+            ebirdApiClient = new EbirdApiClient();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }*/
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
