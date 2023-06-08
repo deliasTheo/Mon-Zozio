@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
 
 
         // Make the API request to get recent observations
+<<<<<<< HEAD
         eBirdApiClient.getRecentObservations(new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -105,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
 
 
 
+=======
+        eBirdApiClient.getRecentObservations();
+>>>>>>> a11059320b8928f08831a53a26589e5f1246d3cc
     }
 
     @Override
