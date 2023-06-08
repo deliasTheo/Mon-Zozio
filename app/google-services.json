@@ -1,33 +1,42 @@
 {
   "project_info": {
-    "project_number": "282878365758",
-    "project_id": "mon-zozio",
-    "storage_bucket": "mon-zozio.appspot.com"
+    "project_number": "317002668617",
+    "firebase_url": "https://monzozio-eff78-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "monzozio-eff78",
+    "storage_bucket": "monzozio-eff78.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:282878365758:android:6796adc95c206c6b1b416f",
+        "mobilesdk_app_id": "1:317002668617:android:92291f8ec938b2fb37fd98",
         "android_client_info": {
           "package_name": "edu.polytech.Mon_Zozio"
         }
       },
       "oauth_client": [
         {
-          "client_id": "282878365758-hl3huf0b9fu7gc5fbut47dhmch0c8ted.apps.googleusercontent.com",
+          "client_id": "317002668617-3m25s1004rc5e6th8dm39n19crjjismj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.polytech.Mon_Zozio",
+            "certificate_hash": "212cea15662d0bf8186f44d105a6283e80820c74"
+          }
+        },
+        {
+          "client_id": "317002668617-us8ndv63k5ingu0i3rr1kb9a8maskp7g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD0VppsouWMt0F4CzMQh_D99xOHxK5TM3Y"
+          "current_key": "AIzaSyAm2NmgcCWnSH3_cK-05kcZwSeoOWDJrdU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "282878365758-hl3huf0b9fu7gc5fbut47dhmch0c8ted.apps.googleusercontent.com",
+              "client_id": "317002668617-839i62h2cskrgv2dglrpq4psib8d2s93.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
