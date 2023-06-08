@@ -81,25 +81,7 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
 
 
         // Make the API request to get recent observations
-        eBirdApiClient.getRecentObservations(new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // Handle the API response
-                        try {
-                            int observationCount = response.getInt("observation_count");
-                            Log.d(TAG, "Observation Count: " + observationCount);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Handle the error
-                        Log.e(TAG, "API Request Error: " + error.getMessage());
-                    }
-                });
+        eBirdApiClient.getRecentObservations();
     }
 
     @Override
