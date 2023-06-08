@@ -3,4 +3,20 @@
     <string name="NUM_ACTIVITY">numActivity</string>
     <string name="VALUE_FOR_MENU_FRAGMENT">menuFragmentValue</string>
     <string name="TITLE">title</string>
+    <string name="changer_de_description" />
+    <string name="description">Description</string>
+    <string name="changer_de_photos">Changer de photo</string>
+    <string name="changer_de_descriptions">Changer de description</string>
+    <string name="valider">Valider</string>
+    <string name="search_text">Vous cherchez un zozio ?</string>
+
+
+    <string-array name="options">
+        <item>"Nom de l'oiseau..."</item>
+        <item>"Couleur de l'oiseau..."</item>
+        <item>"Région géographique de l’oiseau..."</item>
+        <item>"Habitat de l’oiseau..."</item>
+        <item>Taille de l’oiseau...</item>
+        <item>Type d’oiseau...</item>
+    </string-array>
 </resources>

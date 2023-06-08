@@ -32,7 +32,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         ((Button) findViewById(R.id.buttonNotify)).setOnClickListener(click -> {
             String message = "I love this title : " + title.getName() + ". The duration is only "+ title.getDuration() + "s";
-            sendNotificationOnChannel( "Cultural location", message, CHANNEL_3_ID, NotificationCompat.PRIORITY_HIGH );
+            //sendNotificationOnChannel( "Cultural location", message, CHANNEL_3_ID, NotificationCompat.PRIORITY_HIGH );
         });
     }
 

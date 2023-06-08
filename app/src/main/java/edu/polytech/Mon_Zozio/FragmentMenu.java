@@ -76,12 +76,41 @@ public class FragmentMenu extends Fragment {
             case 4 : post.setImageResource(R.drawable.ajouter); break;
         }
 
-        user.setOnClickListener( click -> activity.onClick(0) );
-        moto.setOnClickListener( click -> activity.onClick(1) );
-        car.setOnClickListener( click -> activity.onClick(2) );
-        basket.setOnClickListener( click -> activity.onClick(3) );
-        post.setOnClickListener( click -> activity.onClick(4));
-
+        user.setOnClickListener( click -> {
+            try {
+                activity.onClick(ActivityFactory.MAIN_ACTIVITY);
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
+        });
+        moto.setOnClickListener( click -> {
+            try {
+                activity.onClick(ActivityFactory.RECHERCHER_ACTIVITY);
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
+        });
+        car.setOnClickListener( click -> {
+            try {
+                activity.onClick(ActivityFactory.PIN_ACTIVITY);
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
+        });
+        basket.setOnClickListener( click -> {
+            try {
+                activity.onClick(ActivityFactory.PROFIL_ACTIVITY);
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
+        });
+        post.setOnClickListener( click -> {
+            try {
+                activity.onClick((ActivityFactory.AJOUTER_POST_ACTIVITY));
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
+        });
         return view;
     }
 
