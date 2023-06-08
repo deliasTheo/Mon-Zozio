@@ -20,11 +20,11 @@ import java.util.List;
  */
 
 public class FragmentMenu extends Fragment {
-    private final String TAG = "polytech "+getClass().getSimpleName();
+    private final String TAG = "MonZozio "+getClass().getSimpleName();
     private String attachedActivity;
 
     private int currentSelectedItem;
-    private ImageView user, moto, car, basket;
+    private ImageView user, moto, car, basket, post;
     private ClickableMenuItem<Integer> activity;
 
     public FragmentMenu() {
@@ -60,16 +60,20 @@ public class FragmentMenu extends Fragment {
         moto = view.findViewById(R.id.loupe);
         car = view.findViewById(R.id.pin);
         basket = view.findViewById(R.id.profil);
+        post = view.findViewById(R.id.ajouter);
 
         user.setImageResource(R.drawable.maison);
         moto.setImageResource(R.drawable.loupe);
         car.setImageResource(R.drawable.pin);
         basket.setImageResource(R.drawable.profil);
+        post.setImageResource(R.drawable.ajouter);
+
         switch (currentSelectedItem){
             case 0: user.setImageResource(R.drawable.maison); break;
             case 1: moto.setImageResource(R.drawable.loupe); break;
             case 2: car.setImageResource(R.drawable.pin); break;
             case 3: basket.setImageResource(R.drawable.profil); break;
+            case 4 : post.setImageResource(R.drawable.ajouter); break;
         }
 
         user.setOnClickListener( click -> {
@@ -100,7 +104,13 @@ public class FragmentMenu extends Fragment {
                 throw new RuntimeException(e);
             }
         });
-
+        post.setOnClickListener( click -> {
+            try {
+                activity.onClick((ActivityFactory.AJOUTER_POST_ACTIVITY));
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
+        });
         return view;
     }
 

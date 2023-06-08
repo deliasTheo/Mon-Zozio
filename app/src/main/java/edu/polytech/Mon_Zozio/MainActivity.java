@@ -18,6 +18,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.Window;
+import android.widget.ListView;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -42,7 +44,8 @@ import java.io.IOException;
  * todo: border imageview
  * https://stackoverflow.com/questions/3263611/border-for-an-image-view-in-android
  */
-public class MainActivity extends AppCompatActivity implements ClickableMenuItem<Integer> {
+
+public class MainActivity extends AppCompatActivity implements ClickableMenuItem<Integer>, Controller {
     private final String TAG = "polytech "+getClass().getSimpleName();
     /*EbirdApiClient ebirdApiClient = new EbirdApiClient();
     String regionCode = "FR";*/
@@ -55,9 +58,16 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        ListView listView = findViewById(R.id.postListView);
+        ((ApplicationMonZozio)getApplication()).onViewCreated(listView);
+
         FragmentMenu fragmentFame = new FragmentMenu();
+
         eBirdApiClient = new EbirdApiClient(this);
 
 
@@ -135,14 +145,25 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
         NotificationManagerCompat.from(this).notify(0, notification.build());
     }
 
+
     @Override
     public Context getContext() {
         return getApplicationContext();
     }
 
     @Override
+    public void onClick(int position) {
+        System.out.println("Clicked on " + position);
+    }
+
+    @Override
     public String getKeyValue(int id) {
         return getString(R.string.NUM_ACTIVITY);
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 
 
