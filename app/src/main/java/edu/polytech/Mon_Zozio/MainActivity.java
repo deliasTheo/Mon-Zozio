@@ -57,14 +57,8 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rImage = findViewById(R.id.rImage);
         FragmentMenu fragmentFame = new FragmentMenu();
         eBirdApiClient = new EbirdApiClient(this);
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("image");
-
 
 
         int valeurSaisie = getIntent().getIntExtra(getString(R.string.NUM_ACTIVITY),0);
@@ -86,24 +80,6 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
         //sendNotificationOnChannel(CHANNEL_3_ID, "Mon Zozio", "Bienvenue dans Mon Zozio,\npour les ornithologues c'est l'eldorado !", 1);
 
 
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-
-                Picasso.get().load(value).into(rImage);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Toast.makeText(MainActivity.this, "Loading failed", Toast.LENGTH_SHORT).show();
-                // Failed to read value
-            }
-        });
 
 
         // Make the API request to get recent observations

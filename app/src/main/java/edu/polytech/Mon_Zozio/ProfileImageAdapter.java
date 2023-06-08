@@ -2,6 +2,8 @@ package edu.polytech.Mon_Zozio;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,7 +17,10 @@ import java.util.List;
 
 public class ProfileImageAdapter extends BaseAdapter {
     private Context context;
-    private List<Integer> images;
+    //private List<Integer> images;
+
+    private List<Bitmap> images;
+
     private WindowSizeClass width;
 
 
@@ -27,8 +32,13 @@ public class ProfileImageAdapter extends BaseAdapter {
 
     }
 
-    public void addImage(int resourceId) {
+    /*public void addImage(int resourceId) {
         images.add(resourceId);
+        notifyDataSetChanged();
+    }*/
+
+    public void addImage(Bitmap bitmap) {
+        images.add(bitmap);
         notifyDataSetChanged();
     }
 
@@ -62,8 +72,9 @@ public class ProfileImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        int resourceId = images.get(position);
-        imageView.setImageResource(resourceId);
+        Bitmap resourceId = images.get(position);
+        //imageView.setImageResource(resourceId);
+        imageView.setImageBitmap(resourceId);
 
         return imageView;
     }

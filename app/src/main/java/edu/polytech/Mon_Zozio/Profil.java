@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.net.Uri;
@@ -32,10 +33,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class Profil extends AppCompatActivity implements ClickableMenuItem<Integer> {
@@ -88,10 +99,117 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
         ProfileImageAdapter imageAdapter = new ProfileImageAdapter(this, getResources(), this);
         gridView.setAdapter(imageAdapter);
 
+
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("image");
+        DatabaseReference myRef2 = database.getReference("image2");
+        DatabaseReference myRef3 = database.getReference("image3");
+
+        String imageUrl;
+
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+
+                Picasso.get().load(value).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        imageAdapter.addImage(bitmap);
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(Profil.this, "Loading failed", Toast.LENGTH_SHORT).show();
+                // Failed to read value
+            }
+        });
+
+
+        myRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+
+                Picasso.get().load(value).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        imageAdapter.addImage(bitmap);
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(Profil.this, "Loading failed", Toast.LENGTH_SHORT).show();
+                // Failed to read value
+            }
+        });
+
+        myRef3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+
+                Picasso.get().load(value).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        imageAdapter.addImage(bitmap);
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(Profil.this, "Loading failed", Toast.LENGTH_SHORT).show();
+                // Failed to read value
+            }
+        });
+
+        List<String> imageUrls = new ArrayList<>();
+
         // Ajoutez vos images à l'adaptateur de la grille
-        imageAdapter.addImage(R.drawable.merle);
+        /*imageAdapter.addImage(R.drawable.m);
         imageAdapter.addImage(R.drawable.pinson);
-        imageAdapter.addImage(R.drawable.bruant_zizi);
+        imageAdapter.addImage(R.drawable.bruant_zizi);*/
         // Ajoutez autant d'images que vous le souhaitez
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
