@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import org.apache.commons.io.IOUtils;
 
@@ -38,7 +40,7 @@ public class RechercherActivity extends AppCompatActivity  implements ClickableM
         FragmentMenu fragmentFame = new FragmentMenu();
         gridView = findViewById(R.id.grid_view);
         if (gridView != null) {
-            gridView.setAdapter(new ImageAdapter(this));
+            gridView.setAdapter(new ImageAdapter(this, getResources(), this));
         }
 
         int valeurSaisie = getIntent().getIntExtra(getString(R.string.NUM_ACTIVITY), 0);
@@ -59,6 +61,7 @@ public class RechercherActivity extends AppCompatActivity  implements ClickableM
             throw new RuntimeException(e);
         }
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, filenames);
+
         /*ListView display = findViewById(R.id.listMusique);
         display.setAdapter(adapter);
 
@@ -69,6 +72,16 @@ public class RechercherActivity extends AppCompatActivity  implements ClickableM
             intent.putExtra(getString(R.string.TITLE), title);
             startActivity(intent);
         });*/
+        WindowSizeClass width = WindowSizeClass.computeWindowSizeClasses(getResources(),this)[1];
+
+
+
+        if(width==WindowSizeClass.EXPANDED) {
+            gridView.setNumColumns(4);
+        }
+
+
+
     }
 
     @Override

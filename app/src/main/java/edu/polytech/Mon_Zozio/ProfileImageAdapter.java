@@ -53,7 +53,7 @@ public class ProfileImageAdapter extends BaseAdapter {
         if (convertView == null) {
             imageView = new ImageView(context);
             if(width==WindowSizeClass.EXPANDED){
-                imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,500));
+                imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,400));
             }else{
                 imageView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300));
             }

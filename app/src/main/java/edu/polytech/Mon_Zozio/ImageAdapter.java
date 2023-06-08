@@ -1,11 +1,15 @@
 package edu.polytech.Mon_Zozio;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ImageAdapter extends BaseAdapter {
 
@@ -14,13 +18,16 @@ public class ImageAdapter extends BaseAdapter {
         R.drawable.zozio_1, R.drawable.zozio_2, R.drawable.zozio_3, R.drawable.zozio_3, R.drawable.zozio_4,
             R.drawable.zozio_5, R.drawable.zozio_6, R.drawable.zozio_7, R.drawable.zozio_8, R.drawable.zozio_9
     };
+    private WindowSizeClass width;
 
-    public ImageAdapter(Context myContect) {
+
+    public ImageAdapter(Context myContect, Resources resources, AppCompatActivity activity) {
         this.myContect = myContect;
         this.imagesArray= new int[]{
                 R.drawable.zozio_1, R.drawable.zozio_2, R.drawable.zozio_3, R.drawable.zozio_3, R.drawable.zozio_4,
                 R.drawable.zozio_5, R.drawable.zozio_6, R.drawable.zozio_7, R.drawable.zozio_8, R.drawable.zozio_9
         };
+        width = WindowSizeClass.computeWindowSizeClasses(resources, activity)[1];
     }
 
     @Override
@@ -44,11 +51,17 @@ public class ImageAdapter extends BaseAdapter {
 
         if(convertView == null){
             imageView = new ImageView(myContect);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(340, 350));
+            if(width==WindowSizeClass.EXPANDED) {
+
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 450));
+            }
+            else{
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300));
+            }
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
             //imageView.setImageResource(imagesArray[position]);
-            imageView.setPadding(16,16,16,16);
+            imageView.setPadding(10,10,10,10);
             //return imageView;
         }else {
             imageView = (ImageView) convertView;

@@ -63,7 +63,6 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentMenu, (Fragment) fragmentFame).commit();
 
 
-        WindowSizeClass currentHeight = WindowSizeClass.computeWindowSizeClasses(getResources(), this)[0];
         WindowSizeClass currentWidth = WindowSizeClass.computeWindowSizeClasses(getResources(), this)[1];
 
 
@@ -161,6 +160,8 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
                 showBirthdayPickerDialog();
             }
         });
+
+
         ConstraintLayout constraintLayout = findViewById(R.id.layoutConstraint);
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(constraintLayout);
@@ -190,6 +191,7 @@ public class Profil extends AppCompatActivity implements ClickableMenuItem<Integ
             layoutParams.width = (int) (layoutParams.width*2);
             imageView.setLayoutParams(layoutParams);
 
+            gridView.setNumColumns(4);
 
         }
 
