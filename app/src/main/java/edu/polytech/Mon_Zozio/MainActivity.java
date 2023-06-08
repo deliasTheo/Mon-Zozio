@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.android.volley.Response;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,11 +18,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 /**
  * todo: border imageview
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
     private final String TAG = "polytech "+getClass().getSimpleName();
     /*EbirdApiClient ebirdApiClient = new EbirdApiClient();
     String regionCode = "FR";*/
+    EbirdApiClient eBirdApiClient;
 
     ImageView rImage;
 
@@ -42,11 +45,7 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
         setContentView(R.layout.activity_main);
         rImage = findViewById(R.id.rImage);
         FragmentMenu fragmentFame = new FragmentMenu();
-        /*try {
-            ebirdApiClient = new EbirdApiClient();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
+        eBirdApiClient = new EbirdApiClient(this);
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -77,9 +76,30 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
             public void onCancelled(DatabaseError error) {
                 Toast.makeText(MainActivity.this, "Loading failed", Toast.LENGTH_SHORT).show();
                 // Failed to read value
-
             }
         });
+
+
+        // Make the API request to get recent observations
+        eBirdApiClient.getRecentObservations(new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Handle the API response
+                        try {
+                            int observationCount = response.getInt("observation_count");
+                            Log.d(TAG, "Observation Count: " + observationCount);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle the error
+                        Log.e(TAG, "API Request Error: " + error.getMessage());
+                    }
+                });
     }
 
     @Override
