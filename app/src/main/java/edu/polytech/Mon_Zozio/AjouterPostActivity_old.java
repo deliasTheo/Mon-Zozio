@@ -48,12 +48,6 @@ public class AjouterPostActivity_old extends AppCompatActivity implements Clicka
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_post_old);
 
-//        mImageListView = findViewById(R.id.imageListView);
-//        List<String> imagePaths = getGalleryImages();
-//
-//        ImageAdapter imageAdapter = new ImageAdapter(this, imagePaths);
-//        mImageListView.setAdapter(imageAdapter);
-
         FragmentMenu fragmentFame = new FragmentMenu();
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentMenu, (Fragment) fragmentFame).commit();
 
@@ -177,67 +171,5 @@ public class AjouterPostActivity_old extends AppCompatActivity implements Clicka
             camera = null;
         }
     }
-
-
-//    private List<String>
-//    getGalleryImages() {
-//        List<String> imagePaths = new ArrayList<>();
-//
-//        String[] projection = {MediaStore.Images.Media.DATA};
-//        String sortOrder = MediaStore.Images.Media.DATE_ADDED + " DESC";
-//        Cursor cursor = getContentResolver().query(
-//                MediaStore.Images.Media.INTERNAL_CONTENT_URI,
-//                projection,
-//                null,
-//                null,
-//                sortOrder
-//        );
-//
-//        Log.d("appZozio", MediaStore.Images.Media._ID);
-//
-//
-//        if (cursor != null) {
-//            while (cursor.moveToNext()) {
-//                String imagePath = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
-//                imagePaths.add(imagePath);
-//                Log.d("ImagePath", imagePath); // Ajout de la sortie log pour afficher les chemins des images
-//            }
-//            cursor.close();
-//        }
-//
-//        Log.d("appZozio", imagePaths.toString());
-//
-//
-//        return imagePaths;
-//    }
-
-
-
-//    private List<String> getGalleryImages() {
-//        List<String> imagePaths = new ArrayList<>();
-//
-//        File internalStorage = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-//
-//        Log.d("appZozio", internalStorage.getAbsolutePath());
-//
-//        File[] imageFiles = internalStorage.listFiles(new FilenameFilter() {
-//            @Override
-//            public boolean accept(File dir, String name) {
-//                return name.endsWith(".jpg") || name.endsWith(".png");
-//            }
-//        });
-//
-//        Log.d("appZozio", String.valueOf(imageFiles.length));
-//
-//        if (imageFiles != null) {
-//            for (File imageFile : imageFiles) {
-//                String imagePath = imageFile.getAbsolutePath();
-//                imagePaths.add(imagePath);
-//                Log.d("appZozio", imagePath); // Ajout de la sortie log pour afficher les chemins des images
-//            }
-//        }
-//
-//        return imagePaths;
-//    }
 
 }
