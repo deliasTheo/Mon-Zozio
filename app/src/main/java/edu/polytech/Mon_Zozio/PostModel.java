@@ -9,9 +9,9 @@ public class PostModel extends Observable {
 
     private PostModel() {
         list.add(new Post("Michel", R.drawable.profil_zozio, "Nice, France", R.drawable.image_oiseau));
-        list.add(new Post("Jean", R.drawable.profil_zozio,"Nice, France", R.drawable.image_oiseau));
-        list.add(new Post("Paul", R.drawable.profil_zozio, "Nice, France", R.drawable.image_oiseau));
-        list.add(new Post("Pierre", R.drawable.profil_zozio, "Nice, France", R.drawable.image_oiseau));
+        list.add(new Post("Jean", R.drawable.profil_zozio,"Antibes, France", R.drawable.merle));
+        list.add(new Post("Paul", R.drawable.profil_zozio, "Vallauris, France", R.drawable.pinson));
+        list.add(new Post("Pierre", R.drawable.profil_zozio, "Biot, France", R.drawable.bruant_zizi));
         list.add(new Post("Robert", R.drawable.profil_zozio, "Nice, France", R.drawable.image_oiseau));
     }
 

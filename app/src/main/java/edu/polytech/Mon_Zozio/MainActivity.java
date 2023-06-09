@@ -22,6 +22,7 @@ import android.view.Window;
 import android.widget.ListView;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -115,8 +116,15 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
             }
         });
 
+        WindowSizeClass currentWidth = WindowSizeClass.computeWindowSizeClasses(getResources(), this)[1];
+        if(currentWidth==WindowSizeClass.EXPANDED) {
+            TextView textView = findViewById(R.id.title);
+            textView.setTextSize(35);
 
-    }
+        }
+
+
+        }
 
 
 
