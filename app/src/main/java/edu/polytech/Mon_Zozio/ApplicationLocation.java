@@ -77,6 +77,6 @@ public class ApplicationLocation extends Application {
     public void onCreate() {
         super.onCreate();
         createNotificationChannels();
-        sendNotificationOnChannel("Mon Zozio • Carte", "Bienvenue dans la carte Mon Zozio. C'est la carte, c'est la carte...", CHANNEL_3_ID, 0);
+        sendNotificationOnChannel("Mon Zozio • Carte", "Bienvenue dans Mon Zozio, le paradis des ornitholgues", CHANNEL_3_ID, 0);
     }
 }
