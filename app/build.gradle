@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "edu.polytech.Mon_Zozio"
-        minSdk 25
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -43,16 +43,18 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.2'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.2.1'
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'org.osmdroid:osmdroid-android:6.0.2'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
-    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.2'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.2.1'
 
 
 
-    implementation 'com.google.firebase:firebase-database:20.0.6'
+    implementation 'com.google.firebase:firebase-database:20.2.2'
     implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'androidx.fragment:fragment:1.4.1'
+    implementation 'com.google.firebase:firebase-messaging:23.2.1'
 
 
     testImplementation 'junit:junit:4.13.2'

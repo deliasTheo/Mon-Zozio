@@ -1,5 +1,7 @@
 package edu.polytech.Mon_Zozio;
 
+import static java.lang.Thread.sleep;
+
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -36,7 +38,7 @@ public class ApplicationLocation extends Application {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {  // Créer le NotificationChannel, seulement pour API 26+
             NotificationChannel channel1 = createNotificationChannel(CHANNEL_1_ID,"Channel 1",  NotificationManager.IMPORTANCE_LOW,"This Channel has low priority");
             NotificationChannel channel2 = createNotificationChannel(CHANNEL_2_ID,"Channel 2",  NotificationManager.IMPORTANCE_DEFAULT,"This Channel has default priority");
-            NotificationChannel channel3 = createNotificationChannel(CHANNEL_3_ID,"Channel 2",  NotificationManager.IMPORTANCE_HIGH,"This Channel has high priority");
+            NotificationChannel channel3 = createNotificationChannel(CHANNEL_3_ID,"Channel 3",  NotificationManager.IMPORTANCE_HIGH,"This Channel has high priority");
 
             // Enregister le canal sur le système : attention de ne plus rien modifier après
             NotificationManager manager = getSystemService(NotificationManager.class);
@@ -69,14 +71,5 @@ public class ApplicationLocation extends Application {
             return;
         }
         NotificationManagerCompat.from(this).notify(0, notification.build());
-    }
-
-
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        createNotificationChannels();
-        sendNotificationOnChannel("Mon Zozio • Carte", "Bienvenue dans Mon Zozio, le paradis des ornitholgues", CHANNEL_3_ID, 0);
     }
 }
