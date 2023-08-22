@@ -49,7 +49,7 @@ public class NotificationService {
 
     public void sendNotification(Context context, String title, String message, int notificationId, String channelId) {
         // Create the intent to launch the main activity
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, Profil.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
@@ -72,6 +72,29 @@ public class NotificationService {
 
     public void sendNotification(Context context, String title, String message, int notificationId, String channelId, String imageUrl) {
         new DownloadImageTask(context, title, message, notificationId, channelId).execute(imageUrl);
+    }
+
+    public void sendNotification(Context context, String title, String message, int notificationId, String channelId, Class activityClass) {
+        // Create the intent to launch the main activity
+        Intent intent = new Intent(context, activityClass);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+
+        // Create the notification with small icon and content
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
+                .setSmallIcon(R.drawable.zozio_1)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setContentIntent(pendingIntent)  // Set the intent to open the app
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);  // Automatically dismiss the notification when clicked
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            System.out.println("permission insuffisante");
+            return;
+        }
+        notificationManager.notify(notificationId, builder.build());
     }
 
     private static class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

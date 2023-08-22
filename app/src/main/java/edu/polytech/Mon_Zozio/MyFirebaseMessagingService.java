@@ -22,7 +22,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if (remoteMessage.getNotification().getImageUrl() != null) {
                 ns.sendNotification(getApplicationContext(), remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), 1, NotificationService.CHANNEL_1_ID, remoteMessage.getNotification().getImageUrl().toString());
             } else {
-                // ns.sendNotification(getApplicationContext(), remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), 1, NotificationService.CHANNEL_1_ID
                 ns.sendNotification(getApplicationContext(), remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), 1, NotificationService.CHANNEL_1_ID);
             }
         }

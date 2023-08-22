@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         NotificationService ns = new NotificationService(this);
-        ns.sendNotification(this,"Mon Zozio", "Coucou la famille,\npour les ornithologues c'est l'eldorado !", 2, CHANNEL_3_ID);
+        ns.sendNotification(this,"Mon Zozio", "N'oubliez pas d'éditez votre profil ;)", 2, CHANNEL_3_ID);
 
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
@@ -126,6 +126,4 @@ public class MainActivity extends AppCompatActivity implements ClickableMenuItem
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
     }
-
-
 }
